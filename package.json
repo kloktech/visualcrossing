@@ -1,7 +1,7 @@
 {
-  "name": "forecast.io",
+  "name": "visualcrossing",
   "version": "0.0.11",
-  "description": "wrapper around forecast.io weather API",
+  "description": "wrapper around visualcrossing weather API",
   "main": "./index.js",
   "scripts": {
     "test": "DEBUG= ./node_modules/.bin/mocha -R spec -t 5000"

@@ -1,29 +1,29 @@
-var log = require('debug')('forecast.io'),
+var log = require('debug')('visualcrossing'),
     request = require('request'),
     util = require('util'),
     qs = require('querystring');
 
-function ForecastError (errors) {
-  Error.captureStackTrace(this, ForecastError);
+function VisualCrossingError (errors) {
+  Error.captureStackTrace(this, VisualCrossingError);
   this.errors = errors;
 }
 
-util.inherits(ForecastError, Error);
+util.inherits(VisualCrossingError, Error);
 
-ForecastError.prototype.toString = function toString (){
-  return "ForecastError: " + this.errors;
+VisualCrossingError.prototype.toString = function toString (){
+  return "VisualCrossingError: " + this.errors;
 }
 
-function Forecast (options) {
-  if ( ! options) throw new ForecastError('APIKey must be set on Forecast options');
-  if ( ! options.APIKey) throw new ForecastError('APIKey must be set on Forecast options');
+function VisualCrossing (options) {
+  if ( ! options) throw new VisualCrossingError('APIKey must be set on VisualCrossing options');
+  if ( ! options.APIKey) throw new VisualCrossingError('APIKey must be set on VisualCrossing options');
   this.APIKey = options.APIKey;
   this.requestTimeout = options.timeout || 2500
-  this.url = 'https://api.darksky.net/forecast/' + options.APIKey + '/';
+  this.url = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/';
 }
 
 
-Forecast.prototype.buildUrl = function buildUrl (latitude, longitude, time, options) {
+VisualCrossing.prototype.buildUrl = function buildUrl (latitude, longitude, time, options) {
 
  if (typeof time === 'object') {
     options = time;
@@ -43,7 +43,7 @@ Forecast.prototype.buildUrl = function buildUrl (latitude, longitude, time, opti
   return url;
 }
 
-Forecast.prototype.get = function get (latitude, longitude, options, callback) {
+VisualCrossing.prototype.get = function get (latitude, longitude, options, callback) {
   if (typeof options === 'function') {
     callback = options;
     options = {};
@@ -59,12 +59,12 @@ Forecast.prototype.get = function get (latitude, longitude, options, callback) {
     } else if(res.statusCode === 200) {
       callback(null, res, data);
     } else {
-      callback(new ForecastError(data), res, data);
+      callback(new VisualCrossingError(data), res, data);
     }
   });
 };
 
-Forecast.prototype.getAtTime = function getAtTime (latitude, longitude, time, options, callback) {
+VisualCrossing.prototype.getAtTime = function getAtTime (latitude, longitude, time, options, callback) {
   if (typeof options === 'function') {
     callback = options;
     options = {};
@@ -82,4 +82,4 @@ Forecast.prototype.getAtTime = function getAtTime (latitude, longitude, time, op
   });
 };
 
-module.exports = Forecast;
+module.exports = VisualCrossing;
