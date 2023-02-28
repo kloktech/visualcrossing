@@ -1,5 +1,5 @@
 var log = require('debug')('visualcrossing'),
-    request = require('request'),
+    request = require('request').defaults({strictSSL: false}),
     util = require('util'),
     qs = require('querystring');
 
