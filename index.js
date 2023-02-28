@@ -22,7 +22,6 @@ function VisualCrossing (options) {
   this.url = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/';
 }
 
-
 VisualCrossing.prototype.buildUrl = function buildUrl (latitude, longitude, time, options) {
 
  if (typeof time === 'object') {
@@ -34,7 +33,7 @@ VisualCrossing.prototype.buildUrl = function buildUrl (latitude, longitude, time
   var url = this.url + latitude + ',' + longitude;
 
   if ((typeof time === 'number')||(typeof time === 'string')) {
-    url += ',' + time;
+    url += '/' + time;
   }
 
   url += query;
