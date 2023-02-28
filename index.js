@@ -15,9 +15,9 @@ VisualCrossingError.prototype.toString = function toString (){
 }
 
 function VisualCrossing (options) {
-  if ( ! options) throw new VisualCrossingError('APIKey must be set on VisualCrossing options');
-  if ( ! options.APIKey) throw new VisualCrossingError('APIKey must be set on VisualCrossing options');
-  this.APIKey = options.APIKey;
+  // if ( ! options) throw new VisualCrossingError('APIKey must be set on VisualCrossing options');
+  // if ( ! options.APIKey) throw new VisualCrossingError('APIKey must be set on VisualCrossing options');
+  // this.APIKey = options.APIKey;
   this.requestTimeout = options.timeout || 2500
   this.url = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/';
 }
